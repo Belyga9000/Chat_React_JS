@@ -1,28 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
-import {Message} from './components/Message.js'
+import { Form } from './components/Form/Form';
+//import { MessageList } from './components/Message/Message';
+import { useEffect, useState } from "react";
 
 function App() {
+
+  const [messages,setMessages] = useState([]);
+
+  const handleAddMessage = (author,text) => {
+    setMessages((prevMessages) => [...prevMessages,{author,text}]); 
+  };
+
+  useEffect(() => {
+    setMessages((prevMessages) => [...prevMessages,{author: "Robot",text: "hi"}])
+  },[setMessages]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Message name="Привет"></Message>
+        {messages.map((message, index) => <div key={index}>Имя Автора: {message.author}<p key ={index}>Текст: {message.text}</p></div>)}
+        <Form onSubmit={handleAddMessage}></Form>
       </header>
     </div>
   );
 }
 
 export default App;
-//
