@@ -1,44 +1,58 @@
 import React from 'react';
+import { useEffect, useState } from "react";
 import './MessageList.scss'
 import { Form } from '../Form/Form';
-import { useEffect, useState } from "react";
-import  {List}  from '@mui/material';
-import  {ListItem}  from '@mui/material';
-import  {ListItemText}  from '@mui/material';
+import { Message } from '../Message/Message';
+import { useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export const MessageList = () => {
-  const [messages,setMessages] = useState([]);
+  const [messagesList,setMessagesList] = useState({
+    chat1: [],
+    chat2: [],
+    chat3: [],
+  });
+  
+  const { chatId } = useParams();
+  const handleAddMessage = (author,text,isBot) => {
+    const newMsg = {
+      author,
+      text,
+      isBot,
+      id: `msgId_${Date.now()}`,
+    }
 
-  const handleAddMessage = (author,text,bot) => {
-    setMessages((prevMessages) => [...prevMessages,{author,text,bot}]); 
+    setMessagesList((prevMessagesList) => ({
+      ...prevMessagesList,
+      [chatId]: [...prevMessagesList[chatId],newMsg]
+    })); 
    };
 
   useEffect(() => {
+    const bot = {
+      author: "Robot",
+      text: "Hello",
+      isBot: true
+    }
+
     let timeout;
-    if (messages[messages.length - 1]?.bot === false) {
+
+    if (messagesList[chatId]?.[messagesList[chatId]?.length - 1]?.isBot === false) {
       timeout = setTimeout(() => {
-        setMessages((prevMsg) => [...prevMsg,{author: "Robot",text: "hi",bot:true}])
+        handleAddMessage(bot.author,bot.text,bot.isBot,)
       }, 1000);
     }
     return () => {
       clearTimeout(timeout)
     }
-  },[messages]);
+  },[messagesList]);
 
+  if(!messagesList[chatId]){
+    return <Navigate to="/Chats" replace />
+  }
 
-  return (<div className='Message-list'>
-        <List >
-         {messages.map((message, index) =>(
-            <ListItem>
-                <ListItemText
-                    key={index} 
-                    className="Message-text"
-                    primary={message.author + ': '} />
-                    <ListItemText 
-                        className="Message-text"
-                        primary={message.text} />
-                </ListItem>))}
-        </List>
-        <Form onSubmit={handleAddMessage}></Form>
-        </div>)
+  return (<>
+        <Message messages={messagesList[chatId]}></Message>
+        <Form onSubmit={handleAddMessage}></Form></>
+        )
 };

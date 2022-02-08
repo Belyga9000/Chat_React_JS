@@ -1,8 +1,8 @@
-.App {
+.Chat {
   text-align: center;
 }
 
-.App-header {
+.Chat-header {
   background-color: #a4b2c7;
   min-height: 100vh;
   display: flex;
@@ -10,10 +10,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 .Message-text  {
