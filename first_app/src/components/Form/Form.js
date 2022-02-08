@@ -1,8 +1,8 @@
 import  "./Form.scss";
 import { useState } from "react";
 import Button from '@mui/material/Button';
-import  {TextField}  from "@mui/material";
-import  {Input}  from "@mui/material";
+import { TextField }  from "@mui/material";
+import { Input }  from "@mui/material";
 
 export const Form = ({onSubmit}) => {
     const [author, setAuthor] = useState("");
@@ -14,9 +14,9 @@ export const Form = ({onSubmit}) => {
         setText(e.target.value)
     }
     const handleSubmit = (e) => {
-        const bot = false;
+        const isBot = false;
         e.preventDefault();
-        onSubmit(author,text,bot)
+        onSubmit(author,text,isBot)
         setText("")
         setAuthor("")
         
