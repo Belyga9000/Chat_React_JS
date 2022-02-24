@@ -4,7 +4,6 @@ import { ChatList } from "../ChatList/ChatList";
 import { Profile } from "../Profile/Profile";
 import "./Router.scss"
 
-const Home = () => <h2>Home page</h2>;
 
 export const Router = () => {
     return (
@@ -15,7 +14,7 @@ export const Router = () => {
             <li className="Link-list__item"><Link to="/Profile">Profile</Link></li>
         </ul>
             <Routes>
-                <Route path="/" element={Home}></Route>
+                <Route path="/"></Route>
                 <Route path="Chats">
                     <Route index element={<ChatList />}/>
                     <Route path=':chatId' element={<Chat />}/>
