@@ -1,7 +1,7 @@
 import { CHANGE_CHECKBOX_STATE } from "./actions"
 
 const initialState = {
-    name: "Checkbox",
+    name: "Default",
     initialState: false,
 }
 

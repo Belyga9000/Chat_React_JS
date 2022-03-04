@@ -2,32 +2,21 @@ import  "./Form.scss";
 import { useState } from "react";
 import Button from '@mui/material/Button';
 import { TextField }  from "@mui/material";
-import { Input }  from "@mui/material";
 
-export const Form = ({onSubmit}) => {
-    const [author, setAuthor] = useState("");
-    const getNameValue = (e) => {
-        setAuthor(e.target.value);
-    };
+export const Form = ({ onSubmit }) => {
     const [text, setText] = useState("");
     const getMessageValue = (e) => {
         setText(e.target.value)
     }
     const handleSubmit = (e) => {
+        const author = "Dog";
         const isBot = false;
         e.preventDefault();
         onSubmit(author,text,isBot)
         setText("")
-        setAuthor("")
         
     }
-    return (<form onSubmit={handleSubmit}>
-        <Input 
-            className="Form-input"
-            autoFocus placeholder="Введите имя Автора"
-            value={author} 
-            onChange={getNameValue}
-            type="text"></Input>
+    return (<form onSubmit={ handleSubmit }>
         <TextField
             autoComplete="off"
             multiline

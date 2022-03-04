@@ -1,28 +1,17 @@
-import { List, ListItem } from "@mui/material";
-import { Link } from "react-router-dom";
+import { List } from "@mui/material";
+import { Outlet } from "react-router-dom";
+import { AddChatForm } from "./AddChatForm";
+import { ChatItem } from "./ChatItem";
 import "./ChatList.scss"
 
-export const ChatList = () => {
-    const chatList = [
-        {
-            name: "Chat 1",
-            id: "chat1"
-        },
-        {
-            name: "Chat 2",
-            id: "chat2"
-        },
-        {
-            name: "Chat 3",
-            id: "chat3"
-        }
-    ]
-    return (<>
-                <List className="Chat-list">
-                    {chatList.map((chatList) => 
-                    (<ListItem className="Chat-list__item" key={chatList.id}>
-                        <Link to={`/Chats/${chatList.id}`}>{chatList.name}</Link></ListItem> ))}
-                </List>
-            </>
-    );
-  }
+
+
+export const ChatList = ({ chats, onDeleteChat, onAddChat}) => (
+        <>
+            <List className="Chat-list">
+                {chats.map((chat) => <ChatItem key={chat.id} chat={chat} onDeleteChat={onDeleteChat} />)}
+                <AddChatForm onSubmit={onAddChat} />
+            </List>
+            <Outlet />
+        </>
+);
