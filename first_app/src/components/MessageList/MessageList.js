@@ -1,18 +1,15 @@
 import React from 'react';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import './MessageList.scss'
 import { Form } from '../Form/Form';
 import { Message } from '../Message/Message';
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectMessages } from '../../store/messages/selectors';
 
-export const MessageList = () => {
-  const [messagesList,setMessagesList] = useState({
-    chat1: [],
-    chat2: [],
-    chat3: [],
-  });
-  
+export const MessageList = ({ addMessage }) => {
+  const messages = useSelector(selectMessages)
   const { chatId } = useParams();
   const handleAddMessage = (author,text,isBot) => {
     const newMsg = {
@@ -21,11 +18,7 @@ export const MessageList = () => {
       isBot,
       id: `msgId_${Date.now()}`,
     }
-
-    setMessagesList((prevMessagesList) => ({
-      ...prevMessagesList,
-      [chatId]: [...prevMessagesList[chatId],newMsg]
-    })); 
+    addMessage(chatId, newMsg)
    };
 
   useEffect(() => {
@@ -37,7 +30,7 @@ export const MessageList = () => {
 
     let timeout;
 
-    if (messagesList[chatId]?.[messagesList[chatId]?.length - 1]?.isBot === false) {
+    if (messages[chatId]?.[messages[chatId]?.length - 1]?.isBot === false) {
       timeout = setTimeout(() => {
         handleAddMessage(bot.author,bot.text,bot.isBot,)
       }, 1000);
@@ -45,14 +38,14 @@ export const MessageList = () => {
     return () => {
       clearTimeout(timeout)
     }
-  },[messagesList]);
+  },[messages]);
 
-  if(!messagesList[chatId]){
-    return <Navigate to="/Chats" replace />
+  if(!messages[chatId]){
+    return <Navigate to="/chats" replace />
   }
 
   return (<>
-        <Message messages={messagesList[chatId]}></Message>
+        <Message messages={messages[chatId]}></Message>
         <Form onSubmit={handleAddMessage}></Form></>
         )
 };
