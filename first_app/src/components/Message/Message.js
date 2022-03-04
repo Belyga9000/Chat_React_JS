@@ -9,10 +9,10 @@ export const Message = ({ messages }) => {
      <ListItem key={message.id}  >
          <ListItemText
              className="Message-text"/>
-             {message.author + ':'}
+             {message.author}
              <ListItemText 
                  className="Message-text"/>
-                 {message.text}
+                 {': '+ message.text}
          </ListItem>))}
  </List>)
 };
