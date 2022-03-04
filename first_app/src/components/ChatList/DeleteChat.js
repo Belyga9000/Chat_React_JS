@@ -5,5 +5,5 @@ export const DeleteChat = ({ id, onClick }) => {
         onClick(id)
     },[onClick, id]);
     
-  return <button onClick={handleClick}>x</button>   
+  return (<button onClick={handleClick}>x</button>)   
 }
