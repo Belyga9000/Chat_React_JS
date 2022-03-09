@@ -1,5 +1,8 @@
-export const CHANGE_CHECKBOX_STATE = "PROFILE::CHANGE_SHOW_NAME";
+export const CHANGE_USER_NAME = "PROFILE::CHANGE_USER_NAME";
 
-export const changeCheckboxState = {
-    type: CHANGE_CHECKBOX_STATE,
-}
+export const changeUserName = (name) => ({
+    type: CHANGE_USER_NAME,
+    payload: {
+        name,
+    }
+});

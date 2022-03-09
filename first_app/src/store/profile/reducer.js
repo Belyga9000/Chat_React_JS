@@ -1,18 +1,17 @@
-import { CHANGE_CHECKBOX_STATE } from "./actions"
+import { CHANGE_USER_NAME } from "./actions"
 
 const initialState = {
-    name: "Default",
-    initialState: false,
+    name: `User${Date.now()}`,
 }
 
 
 export const profileReducer = (state = initialState, action) => {
     switch(action.type) {
-        case CHANGE_CHECKBOX_STATE: {
+        case CHANGE_USER_NAME: {
             return {
-                ...state,
-                initialState: !state.initialState,
-            };
+                ...state, 
+                name: action.payload.name,
+            }
         }
         default:
             return state;
