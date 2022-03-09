@@ -9,5 +9,6 @@ export const ChatList = ({ onAddChatSubmit, chatList, onChatDelete }) => {
                 {chatList.map((chat) => <ChatItem key={chat.id} chat={chat} onDeleteChat={onChatDelete} />)}
                 <AddChatForm onSubmit={onAddChatSubmit} />
             </List>
+            
   )
 }
