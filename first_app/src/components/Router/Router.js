@@ -3,7 +3,7 @@ import { BrowserRouter,Routes,Route, Link } from "react-router-dom";
 import { Chat } from "../Chat/Chat";
 import { onAuthStateChanged } from "firebase/auth";
 import { ChatListContainer } from "../ChatList/ChatListContainer";
-import { ConnectedProfile } from "../ConnectedProfile/ConnectedProfile";
+import { ConnectedProfileContainer } from "../ConnectedProfile/ConnectedProfileContainer";
 import { Home } from "../Home/Home";
 import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
@@ -40,11 +40,11 @@ export const Router = () => {
                     <Route path="/signup" element={<Home isSignUp />} />
                 </Route>    
                 <Route path="chats">
-                    <Route index element={<ChatListContainer  />} />
                     <Route path=':chatId' element={<Chat />} />
+                    <Route index element={<ChatListContainer  />} />
                 </Route>
                 <Route path="/profile" element={<PrivateRoute authed={authed} />}>
-                    <Route path="" element={<ConnectedProfile />} />    
+                    <Route path="" element={<ConnectedProfileContainer />} />    
                 </Route>
                 <Route path="/users" element={<UsersContainer />}></Route>
             </Routes>

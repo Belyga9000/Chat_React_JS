@@ -8,13 +8,12 @@ import "./Chat.scss"
 
 export const Chat = () => {
   
-  const chatList = useSelector(selectChatList)
-  const messages = useSelector(selectMessages)
+const messages = useSelector(selectMessages)
   
-  return (
-    <div className="Chat">
+return (
+  <div className="Chat">
     <header className="Chat-header">
-      <ChatListContainer chats={chatList} />
+      <ChatListContainer/>
       <MessageList messages={messages} className="Message-list" />
     </header>
   </div>
